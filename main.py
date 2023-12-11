@@ -35,6 +35,7 @@ def read_image(filepath):
 
 
 def convert_all_to_video():
+    print("converting all images to videos")
     for filepath in files_in_folder("./input"):
         # read image to numpy array in grayscale
         in_arr = read_image(filepath)
@@ -63,6 +64,7 @@ def convert_all_to_video():
 
 
 def convert_all_to_foto():
+    print("converting all images to fotos")
     for filepath in files_in_folder("./input"):
         # read image to numpy array in grayscale
         in_arr = read_image(filepath)
@@ -80,13 +82,14 @@ def convert_all_to_foto():
 
 
 def convert_all_to_array():
+    print("converting all images to numpy arrays")
     for filepath in files_in_folder("./input"):
-        # read image to numpy array in grayscale
-        in_arr = read_image(filepath)
-        # in_arr = downscaled(in_arr)
+        # read image to numpy array in rgba
+        in_arr = cv2.imread(filepath, cv2.IMREAD_UNCHANGED)
+        start_node_image = in_arr[:, :, 3]
+        in_arr = cv2.cvtColor(in_arr, cv2.COLOR_RGBA2GRAY)
 
-        in_arr = downscaled(in_arr)
-        out_arr = convert(in_arr)
+        out_arr = convert(in_arr, start_node_image)
         out_path = "./output_arrays/" + filepath.split("/")[-1].split(".")[0] + ".npy"
 
         # save image
