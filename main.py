@@ -102,10 +102,9 @@ def show_contour_plot():
         # dx, dy = np.gradient(out_arr)
         # plt.imshow(np.sqrt(dx**2 + dy**2))
         maximum = np.max(out_arr)
-        plt.contour(out_arr, levels=150, colors="black", origin="image", linewidths=1)
+        plt.contour(out_arr, levels=250, colors="black", origin="image", linewidths=0.5)
         plt.axis("off")
-        # real axis ratio
-        plt.gca().set_aspect(out_arr.shape[1] / out_arr.shape[0])
+        plt.axis("equal")
         plt.show()
 
 
